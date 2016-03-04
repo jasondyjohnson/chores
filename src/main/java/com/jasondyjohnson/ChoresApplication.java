@@ -11,6 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.lang.reflect.Method;
 import java.util.*;
 
 /**
@@ -28,7 +29,8 @@ public class ChoresApplication {
         return (args) -> {
             try {
                 Class<?> clazz = Class.forName("com.jasondyjohnson.InitChoresApplication");
-                InitChoresApplication.devInitDatabase(userRepository, choreRepository);
+                Method m = clazz.getMethod("devInitDatabase", UserRepository.class, ChoreRewardRepository.class);
+                m.invoke(null, userRepository, choreRepository);
             } catch (ClassNotFoundException e) {
                 log.info("Could not find chores init");
             }
