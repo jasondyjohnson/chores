@@ -1,10 +1,7 @@
 package com.jasondyjohnson;
 
-import com.jasondyjohnson.domain.ChoreReward;
-import com.jasondyjohnson.domain.User;
-import com.jasondyjohnson.domain.UserToChoreReward;
 import com.jasondyjohnson.repository.ChoreRewardRepository;
-import com.jasondyjohnson.repository.UserRepository;
+import com.jasondyjohnson.repository.PersonRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.lang.reflect.Method;
-import java.util.*;
 
 /**
  * Created by Jason on 2/20/2016.
@@ -25,12 +21,12 @@ public class ChoresApplication {
     }
 
     @Bean
-    public CommandLineRunner demo(UserRepository userRepository, ChoreRewardRepository choreRepository) {
+    public CommandLineRunner demo(PersonRepository personRepository, ChoreRewardRepository choreRepository) {
         return (args) -> {
             try {
                 Class<?> clazz = Class.forName("com.jasondyjohnson.InitChoresApplication");
-                Method m = clazz.getMethod("devInitDatabase", UserRepository.class, ChoreRewardRepository.class);
-                m.invoke(null, userRepository, choreRepository);
+                Method m = clazz.getMethod("devInitDatabase", PersonRepository.class, ChoreRewardRepository.class);
+                m.invoke(null, personRepository, choreRepository);
             } catch (ClassNotFoundException e) {
                 log.info("Could not find chores init");
             }

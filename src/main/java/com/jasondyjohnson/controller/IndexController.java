@@ -1,13 +1,15 @@
 package com.jasondyjohnson.controller;
 
-import com.jasondyjohnson.domain.User;
-import com.jasondyjohnson.repository.UserRepository;
+import com.jasondyjohnson.domain.Person;
+import com.jasondyjohnson.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,17 +20,22 @@ import java.util.List;
 public class IndexController {
 
     @Autowired
-    UserRepository userRepository;
+    PersonRepository personRepository;
+
+    @RequestMapping(value="/")
+    public String index(){
+        return "redirect:/index.html";
+    }
 
     @RequestMapping("/index")
     public String index(Model model) {
-        Iterable<User> usersIterable = userRepository.findAll();
-        List<User> users = new ArrayList<>();
-        for (User user : usersIterable) {
-            users.add(user);
+        Iterable<Person> usersIterable = personRepository.findAll();
+        List<Person> persons = new ArrayList<>();
+        for (Person person : usersIterable) {
+            persons.add(person);
         }
-        model.addAttribute("users", users);
-        model.addAttribute("userCount", users.size());
+        model.addAttribute("persons", persons);
+        model.addAttribute("personCount", persons.size());
         return "index";
     }
 

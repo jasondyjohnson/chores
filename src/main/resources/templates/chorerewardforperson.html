@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Points for </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/pure-release-0.6.0/pure-min.css" />
+    <link rel="stylesheet" href="css/pure-release-0.6.0//grids-responsive-min.css" />
+
+    <link rel="stylesheet" href="css/dyjohnsonmain.css" />
+</head>
+<body>
+<div th:replace="fragments/menu :: menu">Menu</div>
+<div class="banner">
+    <h1 th:text = "${'Chores for ' + person.firstName}">Chore List for User </h1>
+    <h2 th:text = "${person.firstName + ' has ' + totalPoints + ' points'}">0</h2>
+</div>
+<div class="pure-g" style="padding-bottom: 1em">
+    <div class="pure-u-1-1">
+        <table class="pure-table main-table">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Chore</th>
+                <th>Points</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="personToChore : ${person.personToChoreRewardList}" th:style="${personToChore.choreReward.points} &lt; 0 ? 'background-color:skyblue'">
+                <th th:text = "${#calendars.format(personToChore.choreRewardDate, 'EEEE, MMMM dd yyyy')}">Test</th>
+                <th th:text = "${personToChore.choreReward.name}">Test</th>
+                <th th:text = "${personToChore.choreReward.points}">Test</th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div sec:authorize="hasRole('USER')" class="pure-g"  style="padding-bottom: 1em">
+    <div class="pure-u-1-2">
+        <a class="pure-button" style="float:right; margin-right: 1em" href="#">Add Chore</a>
+    </div>
+    <div class="pure-u-1-2">
+        <a class="pure-button" style="float:left; margin-left: 1em" href="#">Add Reward</a>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer">&copy; 2013 The Static Templates</div>
+</body>
+</html>

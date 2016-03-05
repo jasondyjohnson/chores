@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @Entity
 @NoArgsConstructor(access= AccessLevel.PROTECTED)
-public class UserToChoreReward {
+public class PersonToChoreReward {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -27,15 +27,15 @@ public class UserToChoreReward {
     private int points;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
+    @JoinColumn(name="person_id")
+    private Person person;
 
     @ManyToOne
     @JoinColumn(name="chore_reward_id")
     private ChoreReward choreReward;
 
-    public UserToChoreReward(User user, ChoreReward choreReward, Date choreRewardDate) {
-        this.user = user;
+    public PersonToChoreReward(Person person, ChoreReward choreReward, Date choreRewardDate) {
+        this.person = person;
         this.choreReward = choreReward;
         this.points = choreReward.getPoints();
         this.choreRewardDate = choreRewardDate;
