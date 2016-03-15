@@ -11,41 +11,44 @@
     <link rel="stylesheet" href="css/dyjohnsonmain.css" />
 </head>
 <body>
+
+
 <div th:replace="fragments/menu :: menu">Menu</div>
-<div class="banner">
-    <h1 th:text = "${'Chores for ' + person.firstName}">Chore List for User </h1>
-    <h2 th:text = "${person.firstName + ' has ' + totalPoints + ' points'}">0</h2>
-</div>
-<div class="pure-g" style="padding-bottom: 1em">
-    <div class="pure-u-1-1">
-        <table class="pure-table main-table">
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>Chore</th>
-                <th>Points</th>
-                <th sec:authorize="hasRole('USER')">Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="personToChore : ${person.personToChoreRewardList}" th:style="${personToChore.choreReward.points} &lt; 0 ? 'background-color:skyblue'">
-                <th th:text = "${#calendars.format(personToChore.choreRewardDate, 'EEEE, MMMM dd yyyy')}">Test</th>
-                <th th:text = "${personToChore.choreReward.name}">Test</th>
-                <th th:text = "${personToChore.choreReward.points}">Test</th>
-                <th sec:authorize="hasRole('USER')">
-                    <a th:href="@{/deletechorerewardforperson(personid=${person.id},personToChoreReward=${personToChore.id})}">Delete</a>
-                </th>
-            </tr>
-            </tbody>
-        </table>
+<div id = "main">
+    <div class="header">
+        <h1 th:text = "${'Chores for ' + person.firstName}">Chore List for User </h1>
+        <h2 th:text = "${person.firstName + ' has ' + totalPoints + ' points'}">0</h2>
     </div>
-</div>
-<div sec:authorize="hasRole('USER')" class="pure-g"  style="padding-bottom: 1em">
-    <div class="pure-u-1-2">
-        <a class="pure-button" style="float:right; margin-right: 1em" th:href="@{/addchorerewardforperson(personid=${person.id},addChore=true)}">Add Chore</a>
-    </div>
-    <div class="pure-u-1-2">
-        <a class="pure-button" style="float:left; margin-left: 1em" th:href="@{/addchorerewardforperson(personid=${person.id},addChore=false)}">Add Reward</a>
+    <div class="content">
+        <div class="pure-g" style="padding-bottom: 1em">
+            <div class="pure-u-1-1">
+                <table class="pure-table main-table">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Chore</th>
+                        <th>Points</th>
+                        <th sec:authorize="hasRole('USER')">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="personToChore : ${person.personToChoreRewardList}" th:style="${personToChore.choreReward.points} &lt; 0 ? 'background-color:skyblue'">
+                        <th th:text = "${#calendars.format(personToChore.choreRewardDate, 'EEEE, MMMM dd yyyy')}">Test</th>
+                        <th th:text = "${personToChore.choreReward.name}">Test</th>
+                        <th th:text = "${personToChore.choreReward.points}">Test</th>
+                        <th sec:authorize="hasRole('USER')">
+                            <a th:href="@{/deletechorerewardforperson(personid=${person.id},personToChoreReward=${personToChore.id})}">Delete</a>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div sec:authorize="hasRole('USER')" class="pure-u-1-1" style="padding-bottom: 2em; padding-left:11em">
+            <a class="pure-button" th:href="@{/addchorerewardforperson(personid=${person.id},addChore=true)}">Add Chore</a>
+            <a class="pure-button" th:href="@{/addchorerewardforperson(personid=${person.id},addChore=false)}">Add Reward</a>
+            <a class="pure-button" th:href="@{/editperson(personid=${person.id})}">Edit User Properties</a>
+        </div>
     </div>
 </div>
 </body>

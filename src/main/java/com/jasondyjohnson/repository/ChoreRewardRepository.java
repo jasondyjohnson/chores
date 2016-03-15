@@ -19,4 +19,6 @@ public interface ChoreRewardRepository extends CrudRepository<ChoreReward, Long>
 
     @Query("select cr FROM ChoreReward cr WHERE cr.points < 0 ORDER BY cr.name ASC")
     public List<ChoreReward> findAllRewardsOrderByNameAsc();
+
+    public long count();
 }

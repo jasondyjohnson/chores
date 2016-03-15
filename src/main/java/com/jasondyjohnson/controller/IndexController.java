@@ -29,7 +29,7 @@ public class IndexController {
 
     @RequestMapping("/index")
     public String index(Model model) {
-        Iterable<Person> usersIterable = personRepository.findAll();
+        Iterable<Person> usersIterable = personRepository.findAllByOrderByFirstNameAsc();
         List<Person> persons = new ArrayList<>();
         for (Person person : usersIterable) {
             persons.add(person);

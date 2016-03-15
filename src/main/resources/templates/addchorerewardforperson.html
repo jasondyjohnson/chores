@@ -12,25 +12,28 @@
 </head>
 
 <body>
-    <div th:replace="fragments/menu :: menu">Menu</div>
-    <div class="banner">
-        <h1 th:text = "${addChore} ? ${'Add Chore for ' + chorePerson.firstName} : ${'Add Reward for ' + chorePerson.firstName}">Add Chore for person</h1>
-    </div>
-    <form class="pure-form pure-form-stacked" action="#" th:action="@{/addchorerewardforperson}" th:object="${personToChoreReward}" method="post">
-        <fieldset>
-            <input type="hidden" th:field="*{person}" th:value="${chorePerson.id}"/>
-            <label for="choreReward" th:text = "${addChore} ? 'Chore' : 'Reward'">Chore</label>
-            <select th:field="*{choreReward}">
-                <option th:each="choreReward : ${allChoreRewards}"
-                        th:value="${choreReward.id}"
-                        th:text="${choreReward.name}">Chore Reward
-                </option>
-            </select>
-            <label for="choreRewardDate">Date (yyyy-mm-dd)</label>
-            <input type="text" th:field="*{choreRewardDate}" />
-            <button class="pure-button pure-button-primary" type="submit" value="Submit">Submit</button>
-        </fieldset>
-
-    </form>
+    <dim id="main">
+        <div th:replace="fragments/menu :: menu">Menu</div>
+        <div class="banner">
+            <h1 th:text = "${addChore} ? ${'Add Chore for ' + chorePerson.firstName} : ${'Add Reward for ' + chorePerson.firstName}">Add Chore for person</h1>
+        </div>
+        <div class="content">
+            <form class="pure-form pure-form-stacked" action="#" th:action="@{/addchorerewardforperson}" th:object="${personToChoreReward}" method="post">
+                <fieldset>
+                    <input type="hidden" th:field="*{person}" th:value="${chorePerson.id}"/>
+                    <label for="choreReward" th:text = "${addChore} ? 'Chore' : 'Reward'">Chore</label>
+                    <select th:field="*{choreReward}">
+                        <option th:each="choreReward : ${allChoreRewards}"
+                                th:value="${choreReward.id}"
+                                th:text="${choreReward.name}">Chore Reward
+                        </option>
+                    </select>
+                    <label for="choreRewardDate">Date (yyyy-mm-dd)</label>
+                    <input type="text" th:field="*{choreRewardDate}" />
+                    <button class="pure-button pure-button-primary" type="submit" value="Submit">Submit</button>
+                </fieldset>
+            </form>
+        </div>
+    </dim>
 </body>
 </html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text = "${'Edit properties for ' + chorePerson.firstName}">Edit properties for Person</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/pure-release-0.6.0/pure-min.css" />
+    <link rel="stylesheet" href="css/pure-release-0.6.0//grids-responsive-min.css" />
+
+    <link rel="stylesheet" href="css/dyjohnsonmain.css" />
+</head>
+<body>
+    <dim id="main">
+        <div th:replace="fragments/menu :: menu">Menu</div>
+        <div class="banner">
+            <h1 th:text = "${'Edit properties for ' + chorePerson.firstName}">Edit properties for Person </h1>
+        </div>
+        <div class="content">
+            <form class="pure-form pure-form-stacked" action="#" th:action="@{/editperson}" th:object="${chorePerson}" method="post">
+                <fieldset>
+                    <input type="hidden" th:field="*{id}" th:value="${chorePerson.id}"/>
+                    <label for="loginName">Login Name</label>
+                    <input type="text" th:field="*{loginName}" />
+                    <label for="firstName">First Name</label>
+                    <input type="text" th:field="*{firstName}" />
+                    <label for="lastName">Last Name</label>
+                    <input type="text" th:field="*{lastName}" />
+                    <label for="email">Email</label>
+                    <input type="text" th:field="*{email}" />
+                    <label for="imageFileUrl">Image URL</label>
+                    <input type="text" th:field="*{imageFileUrl}" />
+                    <button class="pure-button pure-button-primary" type="submit" value="Submit">Submit</button>
+                </fieldset>
+            </form>
+        </div>
+    </dim>
+</body>
+</html>

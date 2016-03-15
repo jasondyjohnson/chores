@@ -12,18 +12,22 @@
 </head>
 <body>
 <div th:replace="fragments/menu :: menu">Menu</div>
-<div th:if="${param.error}">
-    Invalid username and password.
+<div id="main">
+    <div class="content">
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <form class="pure-form pure-form-stacked" th:action="@{/login}" method="post">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username"/>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"/>
+            <button class="pure-button pure-button-primary" type="submit" value="Sign In">Sign In</button>
+        </form>
+    </div>
 </div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-<form class="pure-form pure-form-stacked" th:action="@{/login}" method="post">
-    <label for="username">Username</label>
-    <input type="text" id="username" name="username"/>
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password"/>
-    <button class="pure-button pure-button-primary" type="submit" value="Sign In">Sign In</button>
-</form>
 </body>
 </html>
