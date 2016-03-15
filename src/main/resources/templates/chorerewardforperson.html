@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Points for </title>
+    <title th:text = "${'Chores for ' + person.firstName}">Points for person </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -38,10 +38,10 @@
 </div>
 <div sec:authorize="hasRole('USER')" class="pure-g"  style="padding-bottom: 1em">
     <div class="pure-u-1-2">
-        <a class="pure-button" style="float:right; margin-right: 1em" href="#">Add Chore</a>
+        <a class="pure-button" style="float:right; margin-right: 1em" th:href="@{/addchorerewardforperson(personid=${person.id},addChore=true)}">Add Chore</a>
     </div>
     <div class="pure-u-1-2">
-        <a class="pure-button" style="float:left; margin-left: 1em" href="#">Add Reward</a>
+        <a class="pure-button" style="float:left; margin-left: 1em" th:href="@{/addchorerewardforperson(personid=${person.id},addChore=false)}">Add Reward</a>
     </div>
 </div>
 <div th:replace="fragments/footer :: footer">&copy; 2013 The Static Templates</div>

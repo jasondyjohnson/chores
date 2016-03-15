@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text = "${'Add Chore for ' + chorePerson.firstName}">Add chore for person</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/pure-release-0.6.0/pure-min.css" />
+    <link rel="stylesheet" href="css/pure-release-0.6.0//grids-responsive-min.css" />
+
+    <link rel="stylesheet" href="css/dyjohnsonmain.css" />
+</head>
+
+<body>
+    <div th:replace="fragments/menu :: menu">Menu</div>
+    <div class="banner">
+        <h1 th:text = "${addChore} ? ${'Add Chore for ' + chorePerson.firstName} : ${'Add Reward for ' + chorePerson.firstName}">Add Chore for person</h1>
+    </div>
+    <form class="pure-form pure-form-stacked" action="#" th:action="@{/addchorerewardforperson}" th:object="${personToChoreReward}" method="post">
+        <fieldset>
+            <input type="hidden" th:field="*{person}" th:value="${chorePerson.id}"/>
+            <label for="choreReward">Chore</label>
+            <select th:field="*{choreReward}">
+                <option th:each="choreReward : ${allChoreRewards}"
+                        th:value="${choreReward.id}"
+                        th:text="${choreReward.name}">Chore Reward
+                </option>
+            </select>
+            <label for="choreRewardDate">Date (yyyy-mm-dd)</label>
+            <input type="text" th:field="*{choreRewardDate}" />
+            <button class="pure-button pure-button-primary" type="submit" value="Submit">Submit</button>
+        </fieldset>
+
+    </form>
+    <div th:replace="fragments/footer :: footer">&copy; 2013 The Static Templates</div>
+</body>
+</html>

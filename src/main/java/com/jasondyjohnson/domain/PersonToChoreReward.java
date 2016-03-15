@@ -22,7 +22,7 @@ public class PersonToChoreReward {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(style="F-")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date choreRewardDate;
     private int points;
 
@@ -37,7 +37,9 @@ public class PersonToChoreReward {
     public PersonToChoreReward(Person person, ChoreReward choreReward, Date choreRewardDate) {
         this.person = person;
         this.choreReward = choreReward;
-        this.points = choreReward.getPoints();
+        if (choreReward != null) {
+            this.points = choreReward.getPoints();
+        }
         this.choreRewardDate = choreRewardDate;
     }
 
