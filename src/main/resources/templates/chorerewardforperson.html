@@ -24,6 +24,7 @@
                 <th>Date</th>
                 <th>Chore</th>
                 <th>Points</th>
+                <th sec:authorize="hasRole('USER')">Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -31,6 +32,9 @@
                 <th th:text = "${#calendars.format(personToChore.choreRewardDate, 'EEEE, MMMM dd yyyy')}">Test</th>
                 <th th:text = "${personToChore.choreReward.name}">Test</th>
                 <th th:text = "${personToChore.choreReward.points}">Test</th>
+                <th sec:authorize="hasRole('USER')">
+                    <a th:href="@{/deletechorerewardforperson(personid=${person.id},personToChoreReward=${personToChore.id})}">Delete</a>
+                </th>
             </tr>
             </tbody>
         </table>
@@ -44,6 +48,5 @@
         <a class="pure-button" style="float:left; margin-left: 1em" th:href="@{/addchorerewardforperson(personid=${person.id},addChore=false)}">Add Reward</a>
     </div>
 </div>
-<div th:replace="fragments/footer :: footer">&copy; 2013 The Static Templates</div>
 </body>
 </html>

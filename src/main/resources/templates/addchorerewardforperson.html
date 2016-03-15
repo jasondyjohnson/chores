@@ -19,7 +19,7 @@
     <form class="pure-form pure-form-stacked" action="#" th:action="@{/addchorerewardforperson}" th:object="${personToChoreReward}" method="post">
         <fieldset>
             <input type="hidden" th:field="*{person}" th:value="${chorePerson.id}"/>
-            <label for="choreReward">Chore</label>
+            <label for="choreReward" th:text = "${addChore} ? 'Chore' : 'Reward'">Chore</label>
             <select th:field="*{choreReward}">
                 <option th:each="choreReward : ${allChoreRewards}"
                         th:value="${choreReward.id}"
@@ -32,6 +32,5 @@
         </fieldset>
 
     </form>
-    <div th:replace="fragments/footer :: footer">&copy; 2013 The Static Templates</div>
 </body>
 </html>
