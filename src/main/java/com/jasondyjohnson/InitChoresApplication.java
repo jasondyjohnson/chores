@@ -48,7 +48,7 @@ public class InitChoresApplication {
         ChoreReward mashupPack = new ChoreReward("Minecraft Mashup Pack", -8);
         choreRepository.save(miniPokemon);
 
-            /* Init Leander Chores */
+        /* Init person1 Chores */
         Calendar.Builder builder = new Calendar.Builder().setCalendarType("iso8601");
         Date tempDate = builder
                 .setFields(Calendar.YEAR, 2015)
@@ -124,7 +124,7 @@ public class InitChoresApplication {
 
         personRepository.save(person1);
 
-            /* Init Garrett Chores */
+        /* Init person2 Chores */
         tempDate = builder
                 .setFields(Calendar.MONTH, Calendar.JANUARY)
                 .setFields(Calendar.DAY_OF_MONTH, 1)
