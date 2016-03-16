@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 /**
@@ -18,7 +19,9 @@ public class ChoreReward {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
     @Column(unique=true)
+    @NotNull
     private String name;
+    @NotNull
     private int points;
 
     public ChoreReward(String name, int points) {

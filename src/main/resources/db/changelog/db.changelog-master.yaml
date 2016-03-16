@@ -1,0 +1,95 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: jasondyjohnson
+      changes:
+        - createTable:
+            tableName: chore_reward
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: points
+                  type: bigint
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: person
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+              - column:
+                  name: first_name
+                  type: varchar(255)
+              - column:
+                  name: image_file_url
+                  type: varchar(255)
+              - column:
+                  name: last_name
+                  type: varchar(255)
+              - column:
+                  name: login_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: varchar(255)
+        - createTable:
+            tableName: person_to_chore_reward
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: chore_reward_date
+                  type: date
+              - column:
+                  name: points
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: chore_reward_id
+                  type: bigint
+              - column:
+                  name: person_id
+                  type: bigint
+        - addForeignKeyConstraint:
+            baseColumnNames: chore_reward_id
+            baseTableName: person_to_chore_reward
+            referencedColumnNames: id
+            referencedTableName: chore_reward
+            constraintName: fk_person_to_chore_reward_chore_reward
+        - addForeignKeyConstraint:
+            baseColumnNames: person_id
+            baseTableName: person_to_chore_reward
+            referencedColumnNames: id
+            referencedTableName: person
+            constraintName: fk_person_to_chore_reward_person
+        - createSequence:
+            sequenceName: hibernate_sequence

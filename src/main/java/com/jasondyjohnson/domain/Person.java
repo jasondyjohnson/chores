@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +23,7 @@ public class Person {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
     @Column(unique=true)
+    @NotNull
     private String loginName;
     private String password;
     private String firstName;
