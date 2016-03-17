@@ -19,8 +19,6 @@ import java.lang.reflect.Method;
 @SpringBootApplication
 @Slf4j
 public class ChoresApplication {
-    @Value("#{environment['SPRING_DATASOURCE_USER']}")
-    private String userName;
 
     public static void main(String[] args) {
         SpringApplication.run(ChoresApplication.class, args);
@@ -28,7 +26,6 @@ public class ChoresApplication {
 
     @Bean
     public CommandLineRunner demo(PersonRepository personRepository, ChoreRewardRepository choreRepository) {
-        log.info(userName);
         return (args) -> {
             try {
                 Class<?> clazz = Class.forName("com.jasondyjohnson.InitChoresApplication");
