@@ -5,6 +5,7 @@ import com.jasondyjohnson.domain.Person;
 import com.jasondyjohnson.repository.ChoreRewardRepository;
 import com.jasondyjohnson.repository.PersonRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -13,10 +14,13 @@ import java.util.Date;
  * Created by Jason on 3/4/2016.
  */
 @Slf4j
-public class InitChoresApplication {
+@Component
+public class InitChoresExample implements InitChores {
 
-    public static void devInitDatabase(PersonRepository personRepository, ChoreRewardRepository choreRepository) {
+    @Override
+    public void initDatabase(PersonRepository personRepository, ChoreRewardRepository choreRepository) {
         if (personRepository.count() > 0) {
+            log.info("Data exists. Initialization not needed.");
             return;
         }
         Person person1 = new Person("person1", "", "person1", "person1", "",

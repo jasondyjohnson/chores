@@ -4,6 +4,7 @@ import com.jasondyjohnson.repository.ChoreRewardRepository;
 import com.jasondyjohnson.repository.PersonRepository;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,17 +25,15 @@ public class ChoresApplication {
         SpringApplication.run(ChoresApplication.class, args);
     }
 
+    @Autowired(required=false)
+    InitChores initChoresApplication;
+
     @Bean
     public CommandLineRunner demo(PersonRepository personRepository, ChoreRewardRepository choreRepository) {
         return (args) -> {
-            try {
-                Class<?> clazz = Class.forName("com.jasondyjohnson.InitChoresApplication");
-                Method m = clazz.getMethod("devInitDatabase", PersonRepository.class, ChoreRewardRepository.class);
-                m.invoke(null, personRepository, choreRepository);
-            } catch (ClassNotFoundException e) {
-                log.info("Could not find chores init");
+            if (initChoresApplication != null) {
+                initChoresApplication.initDatabase(personRepository, choreRepository);
             }
-
         };
     }
 }
