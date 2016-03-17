@@ -2,7 +2,9 @@ package com.jasondyjohnson;
 
 import com.jasondyjohnson.repository.ChoreRewardRepository;
 import com.jasondyjohnson.repository.PersonRepository;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,12 +19,16 @@ import java.lang.reflect.Method;
 @SpringBootApplication
 @Slf4j
 public class ChoresApplication {
+    @Value("#{environment['SPRING_DATASOURCE_USER']}")
+    private String userName;
+
     public static void main(String[] args) {
         SpringApplication.run(ChoresApplication.class, args);
     }
 
     @Bean
     public CommandLineRunner demo(PersonRepository personRepository, ChoreRewardRepository choreRepository) {
+        log.info(userName);
         return (args) -> {
             try {
                 Class<?> clazz = Class.forName("com.jasondyjohnson.InitChoresApplication");
