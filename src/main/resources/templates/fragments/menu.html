@@ -15,7 +15,12 @@
         <li class="pure-menu-item"><a href="/index" class="pure-menu-link">Home</a></li>
         <li sec:authorize="!hasRole('USER')" class="pure-menu-item"><a href="/login" class="pure-menu-link">Login</a></li>
         <li sec:authorize="hasRole('USER')" class="pure-menu-item"><a href="/logout" class="pure-menu-link">Logout</a></li>
-        <li sec:authorize="hasRole('ADMIN')" class="pure-menu-item"><a href="#" class="pure-menu-link">Admin</a></li>
+        <li sec:authorize="hasRole('USER')" class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+            <a href="#" class="pure-menu-link">Admin</a>
+            <ul class="pure-menu-children">
+                <li class="pure-menu-item"><a href="/addchorereward" class="pure-menu-link">Add Chore/Reward</a></li>
+            </ul>
+        </li>
         <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a></li>
     </ul>
 </div>
