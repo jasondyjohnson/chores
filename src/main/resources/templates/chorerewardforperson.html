@@ -20,6 +20,11 @@
         <h2 th:text = "${person.firstName + ' has ' + totalPoints + ' points'}">0</h2>
     </div>
     <div class="content">
+        <div sec:authorize="hasRole('USER')" class="pure-u-1-1" style="padding-bottom: 2em; padding-left:11em">
+            <a class="pure-button" th:href="@{/addchorerewardforperson(personid=${person.id},addChore=true)}">Add Chore</a>
+            <a class="pure-button" th:href="@{/addchorerewardforperson(personid=${person.id},addChore=false)}">Add Reward</a>
+            <a class="pure-button" th:href="@{/editperson(personid=${person.id})}">Edit User Properties</a>
+        </div>
         <div class="pure-g" style="padding-bottom: 1em">
             <div class="pure-u-1-1">
                 <table class="pure-table main-table">
